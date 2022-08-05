@@ -1,0 +1,22 @@
+version: '3.9' 
+
+services:
+    
+  frontend:
+    container_name: react
+    image: node:17-alpine
+    volumes:
+      - ./simple-react:/app
+    working_dir: /app
+    command: sh -c "npm install && npm start"
+    ports:
+      - '3000:3000'
+
+  backend:
+    container_name: gin_api
+    build: ./gin_api
+    tty: true
+    volumes:
+      - ./gin_api:/go/src
+    ports:
+      - 3333:3333
